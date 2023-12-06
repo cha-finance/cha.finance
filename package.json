@@ -12,6 +12,8 @@
     "process": "^0.11.10",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "styled-components": "^6.1.1",
+    "styled-system": "^5.1.5",
     "util": "^0.12.4",
     "viem": "~0.3.36",
     "wagmi": "^1.0.6"
@@ -19,6 +21,8 @@
   "devDependencies": {
     "@types/react": "^18.0.9",
     "@types/react-dom": "^18.0.3",
+    "@types/styled-components": "^5.1.30",
+    "@types/styled-system": "^5.1.22",
     "@vitejs/plugin-react": "^4.0.0",
     "typescript": "^5.0.4",
     "vite": "^4.3.5"

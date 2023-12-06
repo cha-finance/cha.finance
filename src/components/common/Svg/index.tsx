@@ -1,0 +1,6 @@
+export { default as LogoIcon } from './Icons/LogoIcon'
+export { default as LeftImage } from './Icons/LeftImage'
+export { default as RightIcon } from './Icons/RightIcon'
+export { default as SwapIcon } from './Icons/SwapIcon'
+export { default as LuaIcon } from './Icons/LuaIcon'
+export { default as KwpIcon } from './Icons/KwpIcon'

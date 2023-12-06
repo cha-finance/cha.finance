@@ -1,0 +1,42 @@
+body,
+html {
+  margin: 0;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+#root {
+  z-index: 10;
+  position: absolute;
+  width: 100%;
+}
+
+#home_wave {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+@font-face {
+  font-family: "SVN-Gilroy Light";
+  font-style: normal;
+  font-weight: normal;
+  src: url("./src/assets/fonts/SVNGilroy\ Light.woff") format("woff");
+}
+
+@font-face {
+  font-family: "SVN-Gilroy Bold";
+  font-style: normal;
+  font-weight: normal;
+  src: url("./src/assets//fonts/SVNGilroy\ Bold.woff") format("woff");
+}
+@font-face {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: normal;
+  src: url("./src/assets/fonts/Poppins-Regular.ttf") format("truetype");
+}
