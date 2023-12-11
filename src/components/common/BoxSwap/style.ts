@@ -30,6 +30,14 @@ export const BoxKWP = styled(BorderBox)`
   max-width: 420px;
 `;
 
+export const BoxKWPRes = styled(BoxKWP)`
+  height: 90px;
+`
+
+export const BoxLuaRes = styled(BoxLua)`
+  height: 180px;
+`
+
 export const TextLua = styled(Text)`
   color: #383838;
   font-family: SVN-Gilroy-Bold;
