@@ -21,7 +21,7 @@ const HomePage = () => {
         <TopPageWrapper>
           <FlexLogo>
             <LogoIcon />
-            <TextLogo>KFinance</TextLogo>
+            <TextLogo>CHAFinance</TextLogo>
           </FlexLogo>
           <TextDesc>
             Lorem ipsum dolor sit amet consectetur. Consectetur nisl amet ipsum

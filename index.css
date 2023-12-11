@@ -22,17 +22,17 @@ body {
 }
 
 @font-face {
-  font-family: "SVN-Gilroy Light";
+  font-family: "SVN-Gilroy-Light";
   font-style: normal;
   font-weight: normal;
-  src: url("./src/assets/fonts/SVNGilroy\ Light.woff") format("woff");
+  src: url("./src/assets/fonts/SVNGilroyLight.woff") format("woff");
 }
 
 @font-face {
-  font-family: "SVN-Gilroy Bold";
+  font-family: "SVN-Gilroy-Bold";
   font-style: normal;
   font-weight: normal;
-  src: url("./src/assets//fonts/SVNGilroy\ Bold.woff") format("woff");
+  src: url("./src/assets//fonts/SVNGilroyBold.woff") format("woff");
 }
 @font-face {
   font-family: "Poppins";

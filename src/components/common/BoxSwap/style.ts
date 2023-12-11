@@ -32,7 +32,7 @@ export const BoxKWP = styled(BorderBox)`
 
 export const TextLua = styled(Text)`
   color: #383838;
-  font-family: SVN-Gilroy;
+  font-family: SVN-Gilroy-Bold;
   font-size: 24px;
   font-style: normal;
   font-weight: 700;
@@ -40,7 +40,7 @@ export const TextLua = styled(Text)`
 `;
 export const TextKWP = styled(Text)`
   color: #fff;
-  font-family: SVN-Gilroy;
+  font-family: SVN-Gilroy-Bold;
   font-size: 24px;
   font-style: normal;
   font-weight: 700;
@@ -90,7 +90,7 @@ export const Button = styled.button`
 export const TextButton = styled(Text)`
   color: #fff;
   text-align: center;
-  font-family: SVN-Gilroy;
+  font-family: SVN-Gilroy-Bold;
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
@@ -104,4 +104,10 @@ export const SwapIconBox = styled(SwapIcon)`
   left: 48%;
   border: 1px solid #ddd;
   border-radius: 100%;
+`
+
+export const AddressText = styled(Text)`
+  font-family: Poppins;
+  text-align: center;
+  margin-bottom: 15px;
 `
