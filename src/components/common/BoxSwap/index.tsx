@@ -287,7 +287,7 @@ const BoxSwap = () => {
                   <AddressText>
                     Your Wallet: <Address>{formatAddress(address)}</Address> |{" "}
                     <Address>{parseFloat(chaBalanceValue.toFixed(2))}</Address>{" "}
-                    CHA&nbsp;&nbsp;
+                    CHA&nbsp;&nbsp;&nbsp;
                   </AddressText>
                 )}
               </WrapperInfo>
