@@ -83,11 +83,15 @@ const BoxSwap = () => {
     args: [address, CHA_FINANCE_ADDRESS],
   });
 
+  console.log(dataCheckAllowance)
+
   const balanceAllowanced = useMemo(() => {
     return new BigNumber(dataCheckAllowance?.toString() || "0")
       .dividedBy(BIG_TEN.pow(18))
       .toNumber();
   }, [dataCheckAllowance]);
+
+  console.log(balanceAllowanced)
 
   const isApprovedChaFinanceSpencer = useMemo(() => {
     return luaBalanceValue - balanceAllowanced <= 0;
@@ -101,7 +105,7 @@ const BoxSwap = () => {
       functionName: "approve",
       args: [
         CHA_FINANCE_ADDRESS,
-        new BigNumber(luaBalanceValue - balanceAllowanced).multipliedBy(
+        new BigNumber(luaBalanceValue).multipliedBy(
           BIG_TEN.pow(18)
         ),
       ],
@@ -142,6 +146,8 @@ const BoxSwap = () => {
       args: [new BigNumber(luaBalanceValue).multipliedBy(BIG_TEN.pow(18))],
     });
 
+    console.log(errorConvert, 'errorConvert')
+
   const {
     data: dataConverToCHA,
     writeAsync: onHandleConverToCHAAsync,
@@ -168,6 +174,8 @@ const BoxSwap = () => {
     refetchLua();
     refetchCHA();
   }, [isSuccessWaitMint]);
+
+  console.log(isApprovedChaFinanceSpencer)
 
   return (
     <>
@@ -255,6 +263,7 @@ const BoxSwap = () => {
                         <Button
                           // disabled={!onHandleConverToCHA}
                           onClick={() => {
+                            console.log('hihihi')
                             onHandleConverToCHA();
                           }}
                         >
