@@ -56,7 +56,7 @@ const BoxSwap = () => {
   });
 
   const luaBalanceValue = useMemo(() => {
-    return new BigNumber(luaBalance?.formatted || "0").toNumber();
+    return new BigNumber(luaBalance?.value.toString() || "0").toNumber();
   }, [luaBalance]);
 
   const [luaInputValue, setLuaInputValue] = useState<string | number>(
@@ -74,7 +74,7 @@ const BoxSwap = () => {
   });
 
   const chaBalanceValue = useMemo(() => {
-    return new BigNumber(CHABalance?.formatted || "0").toNumber();
+    return new BigNumber(CHABalance?.value.toString() || "0").toNumber();
   }, [CHABalance]);
 
   const {
