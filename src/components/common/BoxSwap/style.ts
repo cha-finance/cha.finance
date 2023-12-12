@@ -133,3 +133,13 @@ export const WrapperInfo = styled(Box)`
   right: 0;
   margin: 25px 0;
 `;
+
+export const BoxIcon = styled(Box)`
+  display: flex;
+  width: 40px;
+  height: 40px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100%;
+  overflow: hidden;
+`

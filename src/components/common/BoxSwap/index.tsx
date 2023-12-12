@@ -16,6 +16,7 @@ import {
   BoxKWPRes,
   BoxLuaRes,
   WrapperInfo,
+  BoxIcon,
 } from "./style";
 import { KwpIcon, LuaIcon } from "../Svg";
 import {
@@ -176,7 +177,9 @@ const BoxSwap = () => {
             <WrapperChild>
               <FlexWrap>
                 <FlexToken>
-                  <LuaIcon />
+                  <BoxIcon>
+                    <LuaIcon />
+                  </BoxIcon>
                   <TextLua>You have</TextLua>
                 </FlexToken>
               </FlexWrap>
@@ -186,7 +189,10 @@ const BoxSwap = () => {
             <WrapperChild>
               <FlexWrap>
                 <FlexToken>
-                  <KwpIcon />
+                  <BoxIcon>
+                    <KwpIcon />
+                  </BoxIcon>
+
                   <TextKWP>CHA</TextKWP>
                 </FlexToken>
                 <TextKWP>{chaBalanceValue.toFixed(4)}</TextKWP>
@@ -194,11 +200,11 @@ const BoxSwap = () => {
             </WrapperChild>
           </BoxKWPRes>
           <WrapperInfo>
-          {isConnected && (
-            <AddressText>
-              Your Wallet: <Address>{formatAddress(address)}</Address>
-            </AddressText>
-          )}
+            {isConnected && (
+              <AddressText>
+                Your Wallet: <Address>{formatAddress(address)}</Address>
+              </AddressText>
+            )}
           </WrapperInfo>
         </WrapperBoxSwap>
       ) : (
@@ -207,7 +213,10 @@ const BoxSwap = () => {
             <WrapperChild>
               <FlexWrap>
                 <FlexToken>
-                  <LuaIcon />
+                  <BoxIcon>
+                    <LuaIcon />
+                  </BoxIcon>
+
                   <TextLua>LUA</TextLua>
                 </FlexToken>
                 {isConnected && !isLoadingLUABalance ? (
@@ -223,7 +232,9 @@ const BoxSwap = () => {
             <WrapperChild>
               <FlexWrap>
                 <FlexToken>
-                  <KwpIcon />
+                  <BoxIcon>
+                    <KwpIcon />
+                  </BoxIcon>
                   <TextKWP>CHA</TextKWP>
                 </FlexToken>
                 <TextKWP>{luaBalanceValue.toFixed(4)}</TextKWP>
@@ -273,16 +284,16 @@ const BoxSwap = () => {
             </WrapperChild>
           </BoxKWP>
           <WrapperInfo>
-          {isConnected && (
-            <AddressText>
-              Your Wallet: <Address>{formatAddress(address)}</Address>
-            </AddressText>
-          )}
-          {isConnected && (
-            <AddressText>
-              You have: <Address>{chaBalanceValue.toFixed(4)}</Address> CHA
-            </AddressText>
-          )}
+            {isConnected && (
+              <AddressText>
+                Your Wallet: <Address>{formatAddress(address)}</Address>
+              </AddressText>
+            )}
+            {isConnected && (
+              <AddressText>
+                You have: <Address>{chaBalanceValue.toFixed(4)}</Address> CHA
+              </AddressText>
+            )}
           </WrapperInfo>
         </WrapperBoxSwap>
       )}
