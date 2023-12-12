@@ -71,8 +71,10 @@ const BoxSwap = () => {
   });
 
   const isApproveChaFinanceSpencer = useMemo(() => {
-    return new BigNumber(dataCheckAllowance as any).toNumber();
-  }, [dataCheckAllowance]);
+    return new BigNumber(luaBalance?.value as any)
+      .minus(new BigNumber(dataCheckAllowance as any))
+      .toNumber();
+  }, [dataCheckAllowance, luaBalance?.value]);
 
   // handle approve
   const { config: configApproveCHA, error: errorConfigApproveCHA } =
@@ -80,7 +82,12 @@ const BoxSwap = () => {
       address: LUA_ADDRESS,
       abi: LuaABI,
       functionName: "approve",
-      args: [CHA_FINANCE_ADDRESS, luaBalance?.value],
+      args: [
+        CHA_FINANCE_ADDRESS,
+        new BigNumber(luaBalance?.value as any).minus(
+          new BigNumber(dataCheckAllowance as any)
+        ),
+      ],
     });
 
   const {
@@ -177,7 +184,7 @@ const BoxSwap = () => {
               </FlexWrap>
               {isConnected && (
                 <>
-                  {!!isApproveChaFinanceSpencer ? (
+                  {!isApproveChaFinanceSpencer ? (
                     <Button
                       // disabled={!onHandleConverToCHA}
                       onClick={() => {
@@ -185,7 +192,9 @@ const BoxSwap = () => {
                       }}
                     >
                       <TextButton>
-                        {isLoadingMint || isLoadingWaitMint ? "Converting..." : "Convert LUA"}
+                        {isLoadingMint || isLoadingWaitMint
+                          ? "Converting..."
+                          : "Convert LUA"}
                       </TextButton>
                     </Button>
                   ) : (
@@ -196,7 +205,9 @@ const BoxSwap = () => {
                       }}
                     >
                       <TextButton>
-                        {isLoadingApprove || isLoadingWaitApprove ? "Approving..." : "Approve CHA"}
+                        {isLoadingApprove || isLoadingWaitApprove
+                          ? "Approving..."
+                          : "Approve CHA"}
                       </TextButton>
                     </Button>
                   )}
