@@ -34,6 +34,7 @@ export const PageWrapper = styled(Box)`
     rgba(252, 252, 252, 0.5) 0%,
     rgba(198, 200, 223, 0.5) 100%
   );
+  padding: 0 15px;
 `;
 
 export const PageWrapperFlex = styled(Flex)`
@@ -65,10 +66,17 @@ export const LeftImageBox = styled(Box)`
   position: absolute;
   left: 0;
   top: 20%;
+
+  @media only screen and (max-width: 768px) {
+    display: none;
+  }
 `;
 
 export const RightImageBox = styled(Box)`
   position: absolute;
   right: 0;
   top: 20%;
+  @media only screen and (max-width: 768px) {
+    display: none;
+  }
 `;

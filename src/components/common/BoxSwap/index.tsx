@@ -31,6 +31,7 @@ import { CHA_FINANCE_ADDRESS, LUA_ADDRESS } from "../../../constants";
 import ChaFinanceABI from "../../../abi/ChaFinance.json";
 import LuaABI from "../../../abi/LUA.json";
 import BigNumber from "bignumber.js";
+import { formatAddress } from "../../../utils/formatAddress";
 
 const BoxSwap = () => {
   const { connector, isConnected, address } = useAccount();
@@ -156,7 +157,6 @@ const BoxSwap = () => {
     <>
       {!isSuccessWaitMint ? (
         <WrapperBoxSwap>
-          {isConnected && <AddressText>{address}</AddressText>}
           <BoxLua>
             <WrapperChild>
               <FlexWrap>
@@ -165,7 +165,7 @@ const BoxSwap = () => {
                   <TextLua>LUA</TextLua>
                 </FlexToken>
                 {isConnected && !isLoadingLUABalance ? (
-                  <TextLua>{luaBalance?.formatted}</TextLua>
+                  <TextLua>{Number(luaBalance?.formatted).toFixed(4)}</TextLua>
                 ) : (
                   <TextLua>0</TextLua>
                 )}
@@ -229,7 +229,7 @@ const BoxSwap = () => {
         </WrapperBoxSwap>
       ) : (
         <WrapperBoxSwap>
-          {isConnected && <AddressText>{address}</AddressText>}
+          
           <BoxLuaRes>
             <WrapperChild>
               <FlexWrap>
@@ -253,6 +253,7 @@ const BoxSwap = () => {
           </BoxKWPRes>
         </WrapperBoxSwap>
       )}
+       {isConnected && <AddressText>Your Wallet: {formatAddress(address)}</AddressText>}
     </>
   );
 };

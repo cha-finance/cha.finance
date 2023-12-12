@@ -4,7 +4,7 @@ import { SwapIcon } from "../Svg";
 
 export const WrapperBoxSwap = styled(Box)`
   position: relative;
-  max-width: 420px;
+  max-width: 600px;
   margin-top: 80px;
   //   height: 270px;
   width: 100%;
@@ -12,7 +12,7 @@ export const WrapperBoxSwap = styled(Box)`
 
 export const BorderBox = styled(Box)`
   border-radius: 30px;
-  max-width: 420px;
+  max-width: 600px;
 `;
 
 export const BoxLua = styled(BorderBox)`
@@ -27,7 +27,7 @@ export const BoxKWP = styled(BorderBox)`
   bottom: 0;
   height: 170px;
   width: 100%;
-  max-width: 420px;
+  max-width: 600px;
 `;
 
 export const BoxKWPRes = styled(BoxKWP)`
@@ -117,5 +117,5 @@ export const SwapIconBox = styled(SwapIcon)`
 export const AddressText = styled(Text)`
   font-family: Poppins;
   text-align: center;
-  margin-bottom: 15px;
+  margin-top: 15px;
 `
