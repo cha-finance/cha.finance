@@ -333,6 +333,7 @@ const BoxSwap = () => {
                       )}
                     </Button>
                   ))}
+                {connectors.filter((x) => x.ready && x.id !== connector?.id).length == 0 ? <TextButton>Cannot connect Metamask</TextButton>: <></>}
               </WrapperChild>
             </BoxKWP>
             <WrapperInfo>
