@@ -83,7 +83,7 @@ const BoxSwap = () => {
     args: [address, CHA_FINANCE_ADDRESS],
   });
 
-  console.log(dataCheckAllowance)
+  console.log(dataCheckAllowance);
 
   const balanceAllowanced = useMemo(() => {
     return new BigNumber(dataCheckAllowance?.toString() || "0")
@@ -91,7 +91,7 @@ const BoxSwap = () => {
       .toNumber();
   }, [dataCheckAllowance]);
 
-  console.log(balanceAllowanced)
+  console.log(balanceAllowanced);
 
   const isApprovedChaFinanceSpencer = useMemo(() => {
     return luaBalanceValue - balanceAllowanced <= 0;
@@ -105,9 +105,7 @@ const BoxSwap = () => {
       functionName: "approve",
       args: [
         CHA_FINANCE_ADDRESS,
-        new BigNumber(luaBalanceValue).multipliedBy(
-          BIG_TEN.pow(18)
-        ),
+        new BigNumber(luaBalanceValue).multipliedBy(BIG_TEN.pow(18)),
       ],
     });
 
@@ -143,10 +141,12 @@ const BoxSwap = () => {
       address: CHA_FINANCE_ADDRESS,
       abi: ChaFinanceABI,
       functionName: "mint",
-      args: [new BigNumber(luaBalanceValue).multipliedBy(BIG_TEN.pow(18))],
+      args: [
+        luaBalance?.value ? new BigNumber(luaBalance?.value.toString()) : 0,
+      ],
     });
 
-    console.log(errorConvert, 'errorConvert')
+  console.log(errorConvert, "errorConvert");
 
   const {
     data: dataConverToCHA,
@@ -175,7 +175,7 @@ const BoxSwap = () => {
     refetchCHA();
   }, [isSuccessWaitMint]);
 
-  console.log(isApprovedChaFinanceSpencer)
+  console.log(isApprovedChaFinanceSpencer);
 
   return (
     <>
@@ -263,7 +263,7 @@ const BoxSwap = () => {
                         <Button
                           // disabled={!onHandleConverToCHA}
                           onClick={() => {
-                            console.log('hihihi')
+                            console.log("hihihi");
                             onHandleConverToCHA();
                           }}
                         >
@@ -342,7 +342,12 @@ const BoxSwap = () => {
                       )}
                     </Button>
                   ))}
-                {connectors.filter((x) => x.ready && x.id !== connector?.id).length == 0 ? <TextButton>Cannot connect Metamask</TextButton>: <></>}
+                {connectors.filter((x) => x.ready && x.id !== connector?.id)
+                  .length == 0 ? (
+                  <TextButton>Cannot connect Metamask</TextButton>
+                ) : (
+                  <></>
+                )}
               </WrapperChild>
             </BoxKWP>
             <WrapperInfo>
