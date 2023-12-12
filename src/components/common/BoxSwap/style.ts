@@ -140,6 +140,6 @@ export const BoxIcon = styled(Box)`
   height: 40px;
   justify-content: center;
   align-items: center;
-  border-radius: 100%;
+  border-radius: 10%;
   overflow: hidden;
 `

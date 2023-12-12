@@ -20,17 +20,16 @@ const HomePage = () => {
       <PageWrapperFlex>
         <TopPageWrapper>
           <FlexLogo>
-            <LogoIcon />
-            <TextLogo>Cha.finance</TextLogo>
+            <TextLogo>Cha.Finance</TextLogo>
           </FlexLogo>
           <TextDesc>
-            Cha.finance is a DEFI 3.0 protocol that aims to reinvent and
+            Cha.Finance is a DEFI 3.0 protocol that aims to reinvent and
             decentralize finances across WEB3.
           </TextDesc>
           <BoxSwap />
         </TopPageWrapper>
         <TextDesc>
-          Cha is the native token of the protocol. The stealth project was built
+          CHA is the native token of the protocol. The stealth project was built
           by a community of anonymous coders, and researchers. The launch is
           expected on 31 December, 2024.
         </TextDesc>

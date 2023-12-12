@@ -195,7 +195,7 @@ const BoxSwap = () => {
 
                   <TextKWP>CHA</TextKWP>
                 </FlexToken>
-                <TextKWP>{chaBalanceValue.toFixed(4)}</TextKWP>
+                <TextKWP>{parseFloat(chaBalanceValue.toFixed(2)).toLocaleString()}</TextKWP>
               </FlexWrap>
             </WrapperChild>
           </BoxKWPRes>
@@ -220,7 +220,7 @@ const BoxSwap = () => {
                   <TextLua>LUA</TextLua>
                 </FlexToken>
                 {isConnected && !isLoadingLUABalance ? (
-                  <TextLua>{luaBalanceValue.toFixed(4)}</TextLua>
+                  <TextLua>{parseFloat(luaBalanceValue.toFixed(2)).toLocaleString()}</TextLua>
                 ) : (
                   <TextLua>0</TextLua>
                 )}
@@ -237,7 +237,7 @@ const BoxSwap = () => {
                   </BoxIcon>
                   <TextKWP>CHA</TextKWP>
                 </FlexToken>
-                <TextKWP>{luaBalanceValue.toFixed(4)}</TextKWP>
+                <TextKWP>{parseFloat(luaBalanceValue.toFixed(2)).toLocaleString()}</TextKWP>
               </FlexWrap>
               {isConnected && (
                 <>
@@ -286,12 +286,7 @@ const BoxSwap = () => {
           <WrapperInfo>
             {isConnected && (
               <AddressText>
-                Your Wallet: <Address>{formatAddress(address)}</Address>
-              </AddressText>
-            )}
-            {isConnected && (
-              <AddressText>
-                You have: <Address>{chaBalanceValue.toFixed(4)}</Address> CHA
+                Your Wallet: <Address>{formatAddress(address)}</Address> | <Address>{parseFloat(chaBalanceValue.toFixed(2))}</Address> CHA
               </AddressText>
             )}
           </WrapperInfo>
