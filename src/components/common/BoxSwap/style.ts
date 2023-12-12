@@ -18,7 +18,11 @@ export const BorderBox = styled(Box)`
 export const BoxLua = styled(BorderBox)`
   border: 1px solid rgba(0, 0, 0, 0.4);
   height: 270px;
-  background: linear-gradient(258deg, rgba(255, 255, 255, 0.52) 3.81%, rgba(255, 255, 255, 0.00) 89.35%);
+  background: linear-gradient(
+    258deg,
+    rgba(255, 255, 255, 0.52) 3.81%,
+    rgba(255, 255, 255, 0) 89.35%
+  );
 `;
 
 export const BoxKWP = styled(BorderBox)`
@@ -32,11 +36,11 @@ export const BoxKWP = styled(BorderBox)`
 
 export const BoxKWPRes = styled(BoxKWP)`
   height: 90px;
-`
+`;
 
 export const BoxLuaRes = styled(BoxLua)`
   height: 180px;
-`
+`;
 
 export const TextLua = styled(Text)`
   color: #383838;
@@ -112,10 +116,16 @@ export const SwapIconBox = styled(SwapIcon)`
   left: 48%;
   border: 1px solid #ddd;
   border-radius: 100%;
-`
+`;
 
 export const AddressText = styled(Text)`
-  font-family: Poppins;
-  text-align: center;
-  margin-top: 15px;
-`
+  font-family: SVN-Gilroy-Light;
+  position: absolute;
+  right: 0;
+  margin: 15px 0;
+  font-weight: 400;
+`;
+
+export const Address = styled.span`
+  font-family: SVN-Gilroy-Bold;
+`;

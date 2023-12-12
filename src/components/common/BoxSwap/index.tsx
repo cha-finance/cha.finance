@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo } from "react";
 import {
+  Address,
   BoxKWP,
   BoxLua,
   Button,
@@ -32,6 +33,7 @@ import ChaFinanceABI from "../../../abi/ChaFinance.json";
 import LuaABI from "../../../abi/LUA.json";
 import BigNumber from "bignumber.js";
 import { formatAddress } from "../../../utils/formatAddress";
+import { BIG_TEN } from "../../../utils/formatBalance";
 
 const BoxSwap = () => {
   const { connector, isConnected, address } = useAccount();
@@ -49,6 +51,10 @@ const BoxSwap = () => {
     token: LUA_ADDRESS,
   });
 
+  const luaBalanceValue = useMemo(() => {
+    return new BigNumber(luaBalance?.formatted || '0').toNumber()
+  }, [luaBalance])
+
   const {
     data: CHABalance,
     isError,
@@ -58,6 +64,10 @@ const BoxSwap = () => {
     address,
     token: CHA_FINANCE_ADDRESS,
   });
+
+  const chaBalanceValue = useMemo(() => {
+    return new BigNumber(CHABalance?.formatted || '0').toNumber()
+  }, [CHABalance])
 
   const {
     data: dataCheckAllowance,
@@ -71,11 +81,13 @@ const BoxSwap = () => {
     args: [address, CHA_FINANCE_ADDRESS],
   });
 
-  const isApproveChaFinanceSpencer = useMemo(() => {
-    return new BigNumber(luaBalance?.value as any)
-      .minus(new BigNumber(dataCheckAllowance as any))
-      .toNumber();
-  }, [dataCheckAllowance, luaBalance?.value]);
+  const balanceAllowanced = useMemo(() => {
+    return new BigNumber(dataCheckAllowance?.toString() || '0').dividedBy(BIG_TEN.pow(18)).toNumber()
+  }, [dataCheckAllowance])
+
+  const isApprovedChaFinanceSpencer = useMemo(() => {
+    return luaBalanceValue - balanceAllowanced <= 0;
+  }, [luaBalanceValue, balanceAllowanced]);
 
   // handle approve
   const { config: configApproveCHA, error: errorConfigApproveCHA } =
@@ -85,9 +97,7 @@ const BoxSwap = () => {
       functionName: "approve",
       args: [
         CHA_FINANCE_ADDRESS,
-        new BigNumber(luaBalance?.value as any).minus(
-          new BigNumber(dataCheckAllowance as any)
-        ),
+        new BigNumber(luaBalanceValue - balanceAllowanced).multipliedBy(BIG_TEN.pow(18)),
       ],
     });
 
@@ -123,7 +133,7 @@ const BoxSwap = () => {
       address: CHA_FINANCE_ADDRESS,
       abi: ChaFinanceABI,
       functionName: "mint",
-      args: [luaBalance?.value],
+      args: [new BigNumber(luaBalanceValue).multipliedBy(BIG_TEN.pow(18))],
     });
 
   const {
@@ -145,7 +155,7 @@ const BoxSwap = () => {
 
   const { isLoading: isLoadingWaitMint, isSuccess: isSuccessWaitMint } =
     useWaitForTransaction({
-      hash: dataApproveChaFinance?.hash,
+      hash: dataConverToCHA?.hash,
     });
 
   useEffect(() => {
@@ -184,7 +194,7 @@ const BoxSwap = () => {
               </FlexWrap>
               {isConnected && (
                 <>
-                  {!isApproveChaFinanceSpencer ? (
+                  {isApprovedChaFinanceSpencer ? (
                     <Button
                       // disabled={!onHandleConverToCHA}
                       onClick={() => {
@@ -226,10 +236,10 @@ const BoxSwap = () => {
                 ))}
             </WrapperChild>
           </BoxKWP>
+          {isConnected && <AddressText>Your Wallet: <Address>{formatAddress(address)}</Address></AddressText>}
         </WrapperBoxSwap>
       ) : (
         <WrapperBoxSwap>
-          
           <BoxLuaRes>
             <WrapperChild>
               <FlexWrap>
@@ -251,9 +261,10 @@ const BoxSwap = () => {
               </FlexWrap>
             </WrapperChild>
           </BoxKWPRes>
+          {isConnected && <AddressText>Your Wallet: <Address>{formatAddress(address)}</Address></AddressText>}
         </WrapperBoxSwap>
       )}
-       {isConnected && <AddressText>Your Wallet: {formatAddress(address)}</AddressText>}
+       
     </>
   );
 };
