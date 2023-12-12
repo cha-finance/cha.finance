@@ -171,126 +171,181 @@ const BoxSwap = () => {
 
   return (
     <>
-      {luaBalanceValue === 0 || isSuccessWaitMint ? (
-        <WrapperBoxSwap>
-          <BoxLuaRes>
-            <WrapperChild>
-              <FlexWrap>
-                <FlexToken>
-                  <BoxIcon>
-                    <LuaIcon />
-                  </BoxIcon>
-                  <TextLua>You have</TextLua>
-                </FlexToken>
-              </FlexWrap>
-            </WrapperChild>
-          </BoxLuaRes>
-          <BoxKWPRes>
-            <WrapperChild>
-              <FlexWrap>
-                <FlexToken>
-                  <BoxIcon>
-                    <KwpIcon />
-                  </BoxIcon>
+      {isConnected ? (
+        <>
+          {luaBalanceValue === 0 || isSuccessWaitMint ? (
+            <WrapperBoxSwap>
+              <BoxLuaRes>
+                <WrapperChild>
+                  <FlexWrap>
+                    <FlexToken>
+                      <BoxIcon>
+                        <LuaIcon />
+                      </BoxIcon>
+                      <TextLua>You have</TextLua>
+                    </FlexToken>
+                  </FlexWrap>
+                </WrapperChild>
+              </BoxLuaRes>
+              <BoxKWPRes>
+                <WrapperChild>
+                  <FlexWrap>
+                    <FlexToken>
+                      <BoxIcon>
+                        <KwpIcon />
+                      </BoxIcon>
 
-                  <TextKWP>CHA</TextKWP>
-                </FlexToken>
-                <TextKWP>{parseFloat(chaBalanceValue.toFixed(2)).toLocaleString()}</TextKWP>
-              </FlexWrap>
-            </WrapperChild>
-          </BoxKWPRes>
-          <WrapperInfo>
-            {isConnected && (
-              <AddressText>
-                Your Wallet: <Address>{formatAddress(address)}</Address>
-              </AddressText>
-            )}
-          </WrapperInfo>
-        </WrapperBoxSwap>
-      ) : (
-        <WrapperBoxSwap>
-          <BoxLua>
-            <WrapperChild>
-              <FlexWrap>
-                <FlexToken>
-                  <BoxIcon>
-                    <LuaIcon />
-                  </BoxIcon>
-
-                  <TextLua>LUA</TextLua>
-                </FlexToken>
-                {isConnected && !isLoadingLUABalance ? (
-                  <TextLua>{parseFloat(luaBalanceValue.toFixed(2)).toLocaleString()}</TextLua>
-                ) : (
-                  <TextLua>0</TextLua>
+                      <TextKWP>CHA</TextKWP>
+                    </FlexToken>
+                    <TextKWP>
+                      {parseFloat(chaBalanceValue.toFixed(2)).toLocaleString()}
+                    </TextKWP>
+                  </FlexWrap>
+                </WrapperChild>
+              </BoxKWPRes>
+              <WrapperInfo>
+                {isConnected && (
+                  <AddressText>
+                    Your Wallet: <Address>{formatAddress(address)}</Address>
+                  </AddressText>
                 )}
-              </FlexWrap>
-            </WrapperChild>
-          </BoxLua>
-          <BoxKWP>
-            <SwapIconBox />
-            <WrapperChild>
-              <FlexWrap>
-                <FlexToken>
-                  <BoxIcon>
-                    <KwpIcon />
-                  </BoxIcon>
-                  <TextKWP>CHA</TextKWP>
-                </FlexToken>
-                <TextKWP>{parseFloat(luaBalanceValue.toFixed(2)).toLocaleString()}</TextKWP>
-              </FlexWrap>
-              {isConnected && (
-                <>
-                  {isApprovedChaFinanceSpencer ? (
-                    <Button
-                      // disabled={!onHandleConverToCHA}
-                      onClick={() => {
-                        onHandleConverToCHA();
-                      }}
-                    >
-                      <TextButton>
-                        {isLoadingMint || isLoadingWaitMint
-                          ? "Converting..."
-                          : "Convert LUA"}
-                      </TextButton>
-                    </Button>
-                  ) : (
-                    <Button
-                      // disabled={!onHandleApproveChaFinance}
-                      onClick={() => {
-                        onHandleApproveChaFinance();
-                      }}
-                    >
-                      <TextButton>
-                        {isLoadingApprove || isLoadingWaitApprove
-                          ? "Approving..."
-                          : "Approve CHA"}
-                      </TextButton>
-                    </Button>
-                  )}
-                </>
-              )}
-              {connectors
-                .filter((x) => x.ready && x.id !== connector?.id)
-                .map((x) => (
-                  <Button onClick={() => connect({ connector: x })}>
-                    {isLoading && x.id === pendingConnector?.id ? (
-                      <TextButton>Connecting Wallet... </TextButton>
+              </WrapperInfo>
+            </WrapperBoxSwap>
+          ) : (
+            <WrapperBoxSwap>
+              <BoxLua>
+                <WrapperChild>
+                  <FlexWrap>
+                    <FlexToken>
+                      <BoxIcon>
+                        <LuaIcon />
+                      </BoxIcon>
+
+                      <TextLua>LUA</TextLua>
+                    </FlexToken>
+                    {isConnected && !isLoadingLUABalance ? (
+                      <TextLua>
+                        {parseFloat(
+                          luaBalanceValue.toFixed(2)
+                        ).toLocaleString()}
+                      </TextLua>
                     ) : (
-                      <TextButton>Connect Wallet</TextButton>
+                      <TextLua>0</TextLua>
                     )}
-                  </Button>
-                ))}
-            </WrapperChild>
-          </BoxKWP>
-          <WrapperInfo>
-            {isConnected && (
-              <AddressText>
-                Your Wallet: <Address>{formatAddress(address)}</Address> | <Address>{parseFloat(chaBalanceValue.toFixed(2))}</Address> CHA&nbsp;&nbsp;
-              </AddressText>
-            )}
-          </WrapperInfo>
-        </WrapperBoxSwap>
+                  </FlexWrap>
+                </WrapperChild>
+              </BoxLua>
+              <BoxKWP>
+                <SwapIconBox />
+                <WrapperChild>
+                  <FlexWrap>
+                    <FlexToken>
+                      <BoxIcon>
+                        <KwpIcon />
+                      </BoxIcon>
+                      <TextKWP>CHA</TextKWP>
+                    </FlexToken>
+                    <TextKWP>
+                      {parseFloat(luaBalanceValue.toFixed(2)).toLocaleString()}
+                    </TextKWP>
+                  </FlexWrap>
+                  {isConnected && (
+                    <>
+                      {isApprovedChaFinanceSpencer ? (
+                        <Button
+                          // disabled={!onHandleConverToCHA}
+                          onClick={() => {
+                            onHandleConverToCHA();
+                          }}
+                        >
+                          <TextButton>
+                            {isLoadingMint || isLoadingWaitMint
+                              ? "Converting..."
+                              : "Convert LUA"}
+                          </TextButton>
+                        </Button>
+                      ) : (
+                        <Button
+                          // disabled={!onHandleApproveChaFinance}
+                          onClick={() => {
+                            onHandleApproveChaFinance();
+                          }}
+                        >
+                          <TextButton>
+                            {isLoadingApprove || isLoadingWaitApprove
+                              ? "Approving..."
+                              : "Approve CHA"}
+                          </TextButton>
+                        </Button>
+                      )}
+                    </>
+                  )}
+                </WrapperChild>
+              </BoxKWP>
+              <WrapperInfo>
+                {isConnected && (
+                  <AddressText>
+                    Your Wallet: <Address>{formatAddress(address)}</Address> |{" "}
+                    <Address>{parseFloat(chaBalanceValue.toFixed(2))}</Address>{" "}
+                    CHA&nbsp;&nbsp;
+                  </AddressText>
+                )}
+              </WrapperInfo>
+            </WrapperBoxSwap>
+          )}
+        </>
+      ) : (
+        <>
+          <WrapperBoxSwap>
+            <BoxLua>
+              <WrapperChild>
+                <FlexWrap>
+                  <FlexToken>
+                    <BoxIcon>
+                      <LuaIcon />
+                    </BoxIcon>
+                    <TextLua>LUA</TextLua>
+                  </FlexToken>
+                  <TextLua>0</TextLua>
+                </FlexWrap>
+              </WrapperChild>
+            </BoxLua>
+            <BoxKWP>
+              <SwapIconBox />
+              <WrapperChild>
+                <FlexWrap>
+                  <FlexToken>
+                    <BoxIcon>
+                      <KwpIcon />
+                    </BoxIcon>
+                    <TextKWP>CHA</TextKWP>
+                  </FlexToken>
+                  <TextKWP>0</TextKWP>
+                </FlexWrap>
+                {connectors
+                  .filter((x) => x.ready && x.id !== connector?.id)
+                  .map((x) => (
+                    <Button onClick={() => connect({ connector: x })}>
+                      {isLoading && x.id === pendingConnector?.id ? (
+                        <TextButton>Connecting Wallet... </TextButton>
+                      ) : (
+                        <TextButton>Connect Wallet</TextButton>
+                      )}
+                    </Button>
+                  ))}
+              </WrapperChild>
+            </BoxKWP>
+            <WrapperInfo>
+              {isConnected && (
+                <AddressText>
+                  Your Wallet: <Address>{formatAddress(address)}</Address> |{" "}
+                  <Address>{parseFloat(chaBalanceValue.toFixed(2))}</Address>{" "}
+                  CHA&nbsp;&nbsp;
+                </AddressText>
+              )}
+            </WrapperInfo>
+          </WrapperBoxSwap>
+        </>
       )}
     </>
   );
