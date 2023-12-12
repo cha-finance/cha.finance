@@ -13,6 +13,7 @@ import {
 import { LeftImage, LogoIcon, RightIcon } from "../common/Svg";
 import BoxSwap from "../common/BoxSwap";
 import { inherits } from "util";
+import { NetworkSwitcher } from "../NetworkSwitcher";
 
 const HomePage = () => {
   const { isConnected } = useAccount();
@@ -27,6 +28,7 @@ const HomePage = () => {
             Cha.Finance is a DEFI 3.0 protocol that aims to reinvent and
             decentralize finances across WEB3.
           </TextDesc>
+          <NetworkSwitcher/>
           <BoxSwap />
         </TopPageWrapper>
         <TextDesc>

@@ -18,7 +18,7 @@ export const BorderBox = styled(Box)`
 
 export const BoxLua = styled(BorderBox)`
   border: 1px solid rgba(0, 0, 0, 0.4);
-  height: 270px;
+  height: 320px;
   background: linear-gradient(
     258deg,
     rgba(255, 255, 255, 0.52) 3.81%,
@@ -98,6 +98,10 @@ export const Button = styled.button`
     transition: all 0.3s ease-out;
     transform: scale(1.02);
   }
+  
+  &:disabled {
+    cursor: not-allowed;
+  }
 `;
 
 export const TextButton = styled(Text)`
@@ -142,4 +146,13 @@ export const BoxIcon = styled(Box)`
   align-items: center;
   border-radius: 10%;
   overflow: hidden;
+`
+
+export const MaxBtn = styled.span`
+cursor: pointer;
+background-color: #ddd;
+border-radius: 12px;
+padding: 4px 8px;
+color: #333;
+font-family: "Poppins";
 `

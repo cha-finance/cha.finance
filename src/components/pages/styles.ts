@@ -10,6 +10,13 @@ export const Flex = styled(Box)`
   display: flex;
 `;
 
+export const FlexInput = styled(Flex)`
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-start;
+  gap: 8px;
+`;
+
 export const FlexLogo = styled(Flex)`
   gap: 16px;
   align-items: center;

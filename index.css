@@ -40,3 +40,26 @@ body {
   font-weight: normal;
   src: url("./src/assets/fonts/Poppins-Regular.ttf") format("truetype");
 }
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+  direction: RTL;
+  border: 1px solid #eee ;
+  background: transparent;
+  padding: 15px 0;
+  color: #383838;
+  font-family: SVN-Gilroy-Bold;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  outline: none;
+}
