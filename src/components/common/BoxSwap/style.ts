@@ -8,6 +8,7 @@ export const WrapperBoxSwap = styled(Box)`
   margin-top: 80px;
   //   height: 270px;
   width: 100%;
+  margin-bottom: 48px;
 `;
 
 export const BorderBox = styled(Box)`
@@ -120,12 +121,15 @@ export const SwapIconBox = styled(SwapIcon)`
 
 export const AddressText = styled(Text)`
   font-family: SVN-Gilroy-Light;
-  position: absolute;
-  right: 0;
-  margin: 15px 0;
   font-weight: 400;
 `;
 
 export const Address = styled.span`
   font-family: SVN-Gilroy-Bold;
+`;
+
+export const WrapperInfo = styled(Box)`
+  position: absolute;
+  right: 0;
+  margin: 25px 0;
 `;

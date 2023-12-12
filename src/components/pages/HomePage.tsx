@@ -21,21 +21,18 @@ const HomePage = () => {
         <TopPageWrapper>
           <FlexLogo>
             <LogoIcon />
-            <TextLogo>CHAFinance</TextLogo>
+            <TextLogo>Cha.finance</TextLogo>
           </FlexLogo>
           <TextDesc>
-            Lorem ipsum dolor sit amet consectetur. Consectetur nisl amet ipsum
-            ac sed accumsan nunc viverra volutpat. Non eget sem quam et ac sit
-            facilisis. Tempus nulla leo sem bibendum eget. Ipsum nisi nam massa
-            quam a.
+            Cha.finance is a DEFI 3.0 protocol that aims to reinvent and
+            decentralize finances across WEB3.
           </TextDesc>
           <BoxSwap />
         </TopPageWrapper>
         <TextDesc>
-          Lorem ipsum dolor sit amet consectetur. Consectetur nisl amet ipsum ac
-          sed accumsan nunc viverra volutpat. Non eget sem quam et ac sit
-          facilisis. Tempus nulla leo sem bibendum eget. Ipsum nisi nam massa
-          quam a.
+          Cha is the native token of the protocol. The stealth project was built
+          by a community of anonymous coders, and researchers. The launch is
+          expected on 31 December, 2024.
         </TextDesc>
       </PageWrapperFlex>
       <LeftImageBox>
@@ -44,7 +41,6 @@ const HomePage = () => {
       <RightImageBox>
         <RightIcon />
       </RightImageBox>
-      
     </PageWrapper>
   );
 };

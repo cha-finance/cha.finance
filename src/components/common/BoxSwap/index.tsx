@@ -15,6 +15,7 @@ import {
   AddressText,
   BoxKWPRes,
   BoxLuaRes,
+  WrapperInfo,
 } from "./style";
 import { KwpIcon, LuaIcon } from "../Svg";
 import {
@@ -52,8 +53,8 @@ const BoxSwap = () => {
   });
 
   const luaBalanceValue = useMemo(() => {
-    return new BigNumber(luaBalance?.formatted || '0').toNumber()
-  }, [luaBalance])
+    return new BigNumber(luaBalance?.formatted || "0").toNumber();
+  }, [luaBalance]);
 
   const {
     data: CHABalance,
@@ -66,8 +67,8 @@ const BoxSwap = () => {
   });
 
   const chaBalanceValue = useMemo(() => {
-    return new BigNumber(CHABalance?.formatted || '0').toNumber()
-  }, [CHABalance])
+    return new BigNumber(CHABalance?.formatted || "0").toNumber();
+  }, [CHABalance]);
 
   const {
     data: dataCheckAllowance,
@@ -82,8 +83,10 @@ const BoxSwap = () => {
   });
 
   const balanceAllowanced = useMemo(() => {
-    return new BigNumber(dataCheckAllowance?.toString() || '0').dividedBy(BIG_TEN.pow(18)).toNumber()
-  }, [dataCheckAllowance])
+    return new BigNumber(dataCheckAllowance?.toString() || "0")
+      .dividedBy(BIG_TEN.pow(18))
+      .toNumber();
+  }, [dataCheckAllowance]);
 
   const isApprovedChaFinanceSpencer = useMemo(() => {
     return luaBalanceValue - balanceAllowanced <= 0;
@@ -97,7 +100,9 @@ const BoxSwap = () => {
       functionName: "approve",
       args: [
         CHA_FINANCE_ADDRESS,
-        new BigNumber(luaBalanceValue - balanceAllowanced).multipliedBy(BIG_TEN.pow(18)),
+        new BigNumber(luaBalanceValue - balanceAllowanced).multipliedBy(
+          BIG_TEN.pow(18)
+        ),
       ],
     });
 
@@ -165,7 +170,38 @@ const BoxSwap = () => {
 
   return (
     <>
-      {!isSuccessWaitMint ? (
+      {luaBalanceValue === 0 || isSuccessWaitMint ? (
+        <WrapperBoxSwap>
+          <BoxLuaRes>
+            <WrapperChild>
+              <FlexWrap>
+                <FlexToken>
+                  <LuaIcon />
+                  <TextLua>You have</TextLua>
+                </FlexToken>
+              </FlexWrap>
+            </WrapperChild>
+          </BoxLuaRes>
+          <BoxKWPRes>
+            <WrapperChild>
+              <FlexWrap>
+                <FlexToken>
+                  <KwpIcon />
+                  <TextKWP>CHA</TextKWP>
+                </FlexToken>
+                <TextKWP>{chaBalanceValue.toFixed(4)}</TextKWP>
+              </FlexWrap>
+            </WrapperChild>
+          </BoxKWPRes>
+          <WrapperInfo>
+          {isConnected && (
+            <AddressText>
+              Your Wallet: <Address>{formatAddress(address)}</Address>
+            </AddressText>
+          )}
+          </WrapperInfo>
+        </WrapperBoxSwap>
+      ) : (
         <WrapperBoxSwap>
           <BoxLua>
             <WrapperChild>
@@ -236,35 +272,20 @@ const BoxSwap = () => {
                 ))}
             </WrapperChild>
           </BoxKWP>
-          {isConnected && <AddressText>Your Wallet: <Address>{formatAddress(address)}</Address></AddressText>}
-        </WrapperBoxSwap>
-      ) : (
-        <WrapperBoxSwap>
-          <BoxLuaRes>
-            <WrapperChild>
-              <FlexWrap>
-                <FlexToken>
-                  <LuaIcon />
-                  <TextLua>You have</TextLua>
-                </FlexToken>
-              </FlexWrap>
-            </WrapperChild>
-          </BoxLuaRes>
-          <BoxKWPRes>
-            <WrapperChild>
-              <FlexWrap>
-                <FlexToken>
-                  <KwpIcon />
-                  <TextKWP>CHA</TextKWP>
-                </FlexToken>
-                <TextKWP>{chaBalanceValue.toFixed(4)}</TextKWP>
-              </FlexWrap>
-            </WrapperChild>
-          </BoxKWPRes>
-          {isConnected && <AddressText>Your Wallet: <Address>{formatAddress(address)}</Address></AddressText>}
+          <WrapperInfo>
+          {isConnected && (
+            <AddressText>
+              Your Wallet: <Address>{formatAddress(address)}</Address>
+            </AddressText>
+          )}
+          {isConnected && (
+            <AddressText>
+              You have: <Address>{chaBalanceValue.toFixed(4)}</Address> CHA
+            </AddressText>
+          )}
+          </WrapperInfo>
         </WrapperBoxSwap>
       )}
-       
     </>
   );
 };
