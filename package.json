@@ -5,9 +5,10 @@
   "homepage": "https://luaswap.github.io/cha.finance",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "copy": "cp wave.js dist/",
+    "build": "tsc && vite build && yarn run copy",
     "preview": "vite preview",
-    "predeploy": "npm run build",
+    "predeploy": "yarn run build",
     "deploy": "gh-pages -d dist --cname cha.finance"
   },
   "dependencies": {
