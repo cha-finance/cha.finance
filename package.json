@@ -2,10 +2,13 @@
   "name": "lua-convert",
   "version": "0.0.1",
   "private": true,
+  "homepage": "https://luaswap.github.io/cha.finance",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "dependencies": {
     "bignumber.js": "^9.1.2",
@@ -25,6 +28,7 @@
     "@types/styled-components": "^5.1.30",
     "@types/styled-system": "^5.1.22",
     "@vitejs/plugin-react": "^4.0.0",
+    "gh-pages": "^6.1.0",
     "typescript": "^5.0.4",
     "vite": "^4.3.5"
   }
