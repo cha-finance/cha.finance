@@ -175,7 +175,7 @@ const BoxSwap = () => {
                   <TextLua>LUA</TextLua>
                 </FlexToken>
                 {isConnected && !isLoadingLUABalance ? (
-                  <TextLua>{Number(luaBalance?.formatted).toFixed(4)}</TextLua>
+                  <TextLua>{luaBalanceValue.toFixed(4)}</TextLua>
                 ) : (
                   <TextLua>0</TextLua>
                 )}
@@ -190,7 +190,7 @@ const BoxSwap = () => {
                   <KwpIcon />
                   <TextKWP>CHA</TextKWP>
                 </FlexToken>
-                <TextKWP>0</TextKWP>
+                <TextKWP>{luaBalanceValue.toFixed(4)}</TextKWP>
               </FlexWrap>
               {isConnected && (
                 <>
@@ -257,7 +257,7 @@ const BoxSwap = () => {
                   <KwpIcon />
                   <TextKWP>CHA</TextKWP>
                 </FlexToken>
-                <TextKWP>{CHABalance?.formatted}</TextKWP>
+                <TextKWP>{chaBalanceValue.toFixed(4)}</TextKWP>
               </FlexWrap>
             </WrapperChild>
           </BoxKWPRes>
