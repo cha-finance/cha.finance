@@ -50,7 +50,7 @@ export const TopPageWrapper = styled(Flex)`
 `;
 
 export const TextDesc = styled(Text)`
-  margin-top: 48px;
+  margin-top: 30px;
   color: #4d4d4d;
   text-align: center;
   font-family: Poppins;
@@ -58,7 +58,7 @@ export const TextDesc = styled(Text)`
   font-style: normal;
   font-weight: 500;
   line-height: normal;
-  width: 75%;
+  width: 90%;
   max-width: 800px;
 `;
 

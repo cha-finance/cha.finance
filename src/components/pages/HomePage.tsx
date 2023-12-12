@@ -12,6 +12,7 @@ import {
 } from "./styles";
 import { LeftImage, LogoIcon, RightIcon } from "../common/Svg";
 import BoxSwap from "../common/BoxSwap";
+import { inherits } from "util";
 
 const HomePage = () => {
   const { isConnected } = useAccount();
@@ -33,13 +34,24 @@ const HomePage = () => {
           by a community of anonymous coders, and researchers. The launch is
           expected on 31 December, 2024.
         </TextDesc>
+
+        <br/>
+        <br/>
+        <br/>
+        <TextDesc>
+          <p style={{fontSize: 14}}>
+            We support conversion of LUA to CHA on Ethereum automaticaly. <br/>
+            To convert LUA on Viction to CHA, contact us via telegram: <a style={{color: "inherit"}} href="https://t.me/chafinancesupporter">@chafinancesupporter</a><br/>
+            LUA will be lock forever in <a style={{color: "inherit"}} href="https://etherscan.io/address/0x33bc5ad2e08a8969111eabef864eb5b75d344723" target="__blank">0x33bc5ad2e08a8969111eabef864eb5b75d344723</a>
+          </p>
+        </TextDesc>
       </PageWrapperFlex>
-      <LeftImageBox>
+      {/* <LeftImageBox>
         <LeftImage />
       </LeftImageBox>
       <RightImageBox>
         <RightIcon />
-      </RightImageBox>
+      </RightImageBox> */}
     </PageWrapper>
   );
 };

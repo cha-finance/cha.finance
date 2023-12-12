@@ -286,7 +286,7 @@ const BoxSwap = () => {
           <WrapperInfo>
             {isConnected && (
               <AddressText>
-                Your Wallet: <Address>{formatAddress(address)}</Address> | <Address>{parseFloat(chaBalanceValue.toFixed(2))}</Address> CHA
+                Your Wallet: <Address>{formatAddress(address)}</Address> | <Address>{parseFloat(chaBalanceValue.toFixed(2))}</Address> CHA&nbsp;&nbsp;
               </AddressText>
             )}
           </WrapperInfo>
