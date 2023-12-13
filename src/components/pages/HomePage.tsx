@@ -35,7 +35,6 @@ const HomePage = () => {
               <TextButton>Disconnect from {connector?.name}</TextButton>
             </Button>
           )} */}
-          <NetworkSwitcher />
           <BoxSwap />
         </TopPageWrapper>
         <TextDesc>

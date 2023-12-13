@@ -29,6 +29,8 @@ import {
   useDisconnect,
   usePrepareContractWrite,
   useWaitForTransaction,
+  useSwitchNetwork,
+  useNetwork
 } from "wagmi";
 import { CHA_FINANCE_ADDRESS, LUA_ADDRESS } from "../../../constants";
 
@@ -37,12 +39,15 @@ import LuaABI from "../../../abi/LUA.json";
 import BigNumber from "bignumber.js";
 import { formatAddress } from "../../../utils/formatAddress";
 import { BIG_TEN } from "../../../utils/formatBalance";
-import { Flex, FlexInput } from "../../pages/styles";
+import { Flex, FlexInput, TextDesc } from "../../pages/styles";
+import { NetworkSwitcher } from "../../NetworkSwitcher";
 
 const BoxSwap = () => {
   const { connector, isConnected, address } = useAccount();
   const { connect, connectors, error, isLoading, pendingConnector } =
     useConnect();
+  
+  const { chain } = useNetwork();
   const { disconnect } = useDisconnect();
 
   const {
@@ -56,9 +61,10 @@ const BoxSwap = () => {
   });
 
   const luaBalanceValue = useMemo(() => {
-    return new BigNumber(luaBalance?.value.toString() || "0")
+    let v = new BigNumber(luaBalance?.value.toString() || "0")
       .dividedBy(BIG_TEN.pow(18))
       .toNumber();
+    return parseFloat((v.toString().match(new RegExp('^-?\\d+(?:\.\\d{0,' + (2 || -1) + '})?')) as any)[0] || v.toString());
   }, [luaBalance]);
 
   const [luaInputValue, setLuaInputValue] = useState<string | number>(
@@ -235,10 +241,7 @@ const BoxSwap = () => {
                 <WrapperChild>
                   <FlexWrap>
                     <FlexToken>
-                      <BoxIcon>
-                        <LuaIcon />
-                      </BoxIcon>
-                      <TextLua>You have</TextLua>
+                      <TextLua>Your CHA</TextLua>
                     </FlexToken>
                   </FlexWrap>
                 </WrapperChild>
@@ -254,7 +257,7 @@ const BoxSwap = () => {
                       <TextKWP>CHA</TextKWP>
                     </FlexToken>
                     <TextKWP>
-                      {parseFloat(chaBalanceValue.toFixed(4)).toLocaleString()}
+                      {parseFloat(chaBalanceValue.toFixed(2)).toLocaleString()}
                     </TextKWP>
                   </FlexWrap>
                 </WrapperChild>
@@ -285,6 +288,7 @@ const BoxSwap = () => {
                           <input
                             type="number"
                             value={luaInputValue}
+                            style={{border: 'none'}}
                             onChange={(event) =>
                               setLuaInputValue(event.target.value)
                             }
@@ -320,10 +324,11 @@ const BoxSwap = () => {
                       <TextKWP>CHA</TextKWP>
                     </FlexToken>
                     <TextKWP>
-                      {parseFloat(luaBalanceValue.toFixed(4)).toLocaleString()}
+                      {parseFloat(luaInputValue.toString()).toLocaleString()}
                     </TextKWP>
                   </FlexWrap>
-                  {isConnected && (
+                  <NetworkSwitcher />
+                  {isConnected && !chain?.unsupported && (
                     <>
                       {isApprovedChaFinanceSpencer ? (
                         <Button
@@ -335,7 +340,7 @@ const BoxSwap = () => {
                           <TextButton>
                             {isLoadingMint || isLoadingWaitMint
                               ? "Converting..."
-                              : "Convert LUA"}
+                              : "Convert LUA to CHA"}
                           </TextButton>
                         </Button>
                       ) : (
@@ -360,7 +365,7 @@ const BoxSwap = () => {
                 {isConnected && (
                   <AddressText>
                     Your Wallet: <Address>{formatAddress(address)}</Address> |{" "}
-                    <Address>{parseFloat(chaBalanceValue.toFixed(4))}</Address>{" "}
+                    <Address>{parseFloat(chaBalanceValue.toFixed(2)).toLocaleString()}</Address>{" "}
                     CHA&nbsp;&nbsp;&nbsp;
                   </AddressText>
                 )}
@@ -419,7 +424,7 @@ const BoxSwap = () => {
               {isConnected && (
                 <AddressText>
                   Your Wallet: <Address>{formatAddress(address)}</Address> |{" "}
-                  <Address>{parseFloat(chaBalanceValue.toFixed(4))}</Address>{" "}
+                  <Address>{parseFloat(chaBalanceValue.toFixed(2)).toLocaleString()}</Address>{" "}
                   CHA&nbsp;&nbsp;
                 </AddressText>
               )}

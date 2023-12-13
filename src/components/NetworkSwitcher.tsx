@@ -12,25 +12,23 @@ const Wrapper = styled(Box)`
 
 export function NetworkSwitcher() {
   const { chain } = useNetwork();
-  const { chains, error, isLoading, pendingChainId, switchNetwork } =
-    useSwitchNetwork();
+  const { chains, error, isLoading, pendingChainId, switchNetwork } = useSwitchNetwork();
 
   return (
     <>
       {chain?.unsupported && (
         <Wrapper>
-          <div>
+          {/* <div>
             Connected to {chain?.name ?? chain?.id}
             {chain?.unsupported && " (unsupported)"}
-          </div>
+          </div> */}
           {switchNetwork && (
             <div>
-              Switch to:
               {chains.map((x) =>
                 x.id === chain?.id ? null : (
                   <Button key={x.id} onClick={() => switchNetwork(x.id)}>
                     <TextButton>
-                      {x.name}
+                      Switch to {x.name}
                       {isLoading && x.id === pendingChainId && " (switching)"}
                     </TextButton>
                   </Button>
