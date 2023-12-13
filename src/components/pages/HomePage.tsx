@@ -1,5 +1,5 @@
 import React from "react";
-import { useAccount } from "wagmi";
+import { useAccount, useDisconnect } from "wagmi";
 import {
   FlexLogo,
   LeftImageBox,
@@ -14,9 +14,11 @@ import { LeftImage, LogoIcon, RightIcon } from "../common/Svg";
 import BoxSwap from "../common/BoxSwap";
 import { inherits } from "util";
 import { NetworkSwitcher } from "../NetworkSwitcher";
+import { Button, TextButton } from "../common/BoxSwap/style";
 
 const HomePage = () => {
-  const { isConnected } = useAccount();
+  const { isConnected, connector } = useAccount();
+  const { disconnect } = useDisconnect()
   return (
     <PageWrapper>
       <PageWrapperFlex>
@@ -28,6 +30,11 @@ const HomePage = () => {
             Cha.Finance is a DEFI 3.0 protocol that aims to reinvent and
             decentralize finances across WEB3.
           </TextDesc>
+          {isConnected && (
+          <Button onClick={() => disconnect()}>
+            <TextButton>Disconnect from {connector?.name}</TextButton>
+          </Button>
+        )}
           <NetworkSwitcher/>
           <BoxSwap />
         </TopPageWrapper>

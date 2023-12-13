@@ -16,9 +16,9 @@ export function NetworkSwitcher() {
     useSwitchNetwork();
 
   return (
-    <Wrapper>
+    <>
       {chain?.unsupported && (
-        <>
+        <Wrapper>
           <div>
             Connected to {chain?.name ?? chain?.id}
             {chain?.unsupported && " (unsupported)"}
@@ -38,8 +38,8 @@ export function NetworkSwitcher() {
               )}
             </div>
           )}
-        </>
+        </Wrapper>
       )}
-    </Wrapper>
+    </>
   );
 }

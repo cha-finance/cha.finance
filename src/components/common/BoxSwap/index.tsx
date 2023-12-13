@@ -56,12 +56,18 @@ const BoxSwap = () => {
   });
 
   const luaBalanceValue = useMemo(() => {
-    return new BigNumber(luaBalance?.value.toString() || "0").dividedBy(BIG_TEN.pow(18)).toNumber();
+    return new BigNumber(luaBalance?.value.toString() || "0")
+      .dividedBy(BIG_TEN.pow(18))
+      .toNumber();
   }, [luaBalance]);
 
   const [luaInputValue, setLuaInputValue] = useState<string | number>(
     luaBalanceValue
   );
+
+  useEffect(() => {
+    setLuaInputValue(luaBalanceValue)
+  }, [luaBalanceValue])
 
   const {
     data: CHABalance,
@@ -74,7 +80,9 @@ const BoxSwap = () => {
   });
 
   const chaBalanceValue = useMemo(() => {
-    return new BigNumber(CHABalance?.value.toString() || "0").dividedBy(BIG_TEN.pow(18)).toNumber();
+    return new BigNumber(CHABalance?.value.toString() || "0")
+      .dividedBy(BIG_TEN.pow(18))
+      .toNumber();
   }, [CHABalance]);
 
   const {
@@ -103,6 +111,20 @@ const BoxSwap = () => {
     return luaBalanceValue - balanceAllowanced <= 0;
   }, [luaBalanceValue, balanceAllowanced]);
 
+  const isDisableButton = useMemo(() => {
+    if (!luaInputValue || Number(luaInputValue) <= 0) {
+      return true;
+    } else if (
+      new BigNumber(luaInputValue)
+        .multipliedBy(BIG_TEN.pow(18))
+        .minus(new BigNumber((luaBalance?.value || "0").toString()))
+        .toNumber() > 0
+    ) {
+      return true;
+    }
+    return false;
+  }, [luaInputValue, luaBalance]);
+
   // handle approve
   const { config: configApproveCHA, error: errorConfigApproveCHA } =
     usePrepareContractWrite({
@@ -111,7 +133,14 @@ const BoxSwap = () => {
       functionName: "approve",
       args: [
         CHA_FINANCE_ADDRESS,
-        new BigNumber(luaBalanceValue).multipliedBy(BIG_TEN.pow(18)),
+        new BigNumber(luaInputValue)
+          .multipliedBy(BIG_TEN.pow(18))
+          .minus(new BigNumber((luaBalance?.value || "0").toString()))
+          .toNumber() < 0
+          ? new BigNumber(luaInputValue).multipliedBy(BIG_TEN.pow(18))
+          : luaBalance?.value
+          ? new BigNumber(luaBalance?.value.toString())
+          : 0,
       ],
     });
 
@@ -122,12 +151,16 @@ const BoxSwap = () => {
   } = useContractWrite(configApproveCHA);
 
   const onHandleApproveChaFinance = async () => {
-    try {
-      await onHandleApproveChaFinanceAsync?.();
-    } catch (error) {
-      console.log(error);
-    } finally {
-      refetchApproved();
+    if (isDisableButton) {
+      return;
+    } else {
+      try {
+        await onHandleApproveChaFinanceAsync?.();
+      } catch (error) {
+        console.log(error);
+      } finally {
+        refetchApproved();
+      }
     }
   };
 
@@ -141,20 +174,6 @@ const BoxSwap = () => {
   }, [isSuccessWaitApprove]);
 
   // handle convert LUA to CHA
-  const isDisableConvert = useMemo(() => {
-    if (!luaInputValue || Number(luaInputValue) <= 0) {
-      return true;
-    }
-    else if (
-      new BigNumber(luaInputValue)
-        .multipliedBy(BIG_TEN.pow(18))
-        .minus(new BigNumber((luaBalance?.value || "0").toString()))
-        .toNumber() > 0
-    ) {
-      return true
-    }
-    return false
-  }, [luaInputValue, luaBalance]);
 
   const { config: configConvertToCHA, error: errorConvert } =
     usePrepareContractWrite({
@@ -163,10 +182,13 @@ const BoxSwap = () => {
       functionName: "mint",
       args: [
         new BigNumber(luaInputValue)
-        .multipliedBy(BIG_TEN.pow(18))
-        .minus(new BigNumber((luaBalance?.value || "0").toString()))
-        .toNumber() < 0 ? new BigNumber(luaInputValue)
-        .multipliedBy(BIG_TEN.pow(18)) : (luaBalance?.value ? new BigNumber(luaBalance?.value.toString()) : 0),
+          .multipliedBy(BIG_TEN.pow(18))
+          .minus(new BigNumber((luaBalance?.value || "0").toString()))
+          .toNumber() < 0
+          ? new BigNumber(luaInputValue).multipliedBy(BIG_TEN.pow(18))
+          : luaBalance?.value
+          ? new BigNumber(luaBalance?.value.toString())
+          : 0,
       ],
     });
 
@@ -179,8 +201,8 @@ const BoxSwap = () => {
   } = useContractWrite(configConvertToCHA);
 
   const onHandleConverToCHA = async () => {
-    if (isDisableConvert) {
-      return
+    if (isDisableButton) {
+      return;
     } else {
       try {
         await onHandleConverToCHAAsync?.();
@@ -191,7 +213,6 @@ const BoxSwap = () => {
         refetchCHA();
       }
     }
-    
   };
 
   const { isLoading: isLoadingWaitMint, isSuccess: isSuccessWaitMint } =
@@ -250,43 +271,42 @@ const BoxSwap = () => {
             <WrapperBoxSwap>
               <BoxLua>
                 <WrapperChild>
-                  <FlexWrap>
-                    <FlexToken>
-                      <BoxIcon>
-                        <LuaIcon />
-                      </BoxIcon>
-
-                      <TextLua>LUA</TextLua>
-                    </FlexToken>
+                  <div>
                     {isConnected && !isLoadingLUABalance ? (
-                      <>
-                        {isApprovedChaFinanceSpencer ? (
-                          <FlexInput>
-                            <input
-                              type="number"
-                              value={luaInputValue}
-                              onChange={(event) =>
-                                setLuaInputValue(event.target.value)
-                              }
-                            />
-                            <MaxBtn
-                              onClick={() => setLuaInputValue(luaBalanceValue)}
-                            >
-                              Max
-                            </MaxBtn>
-                          </FlexInput>
-                        ) : (
-                          <TextLua>
-                            {parseFloat(
-                              luaBalanceValue.toFixed(4)
-                            ).toLocaleString()}
-                          </TextLua>
-                        )}
-                      </>
+                      <FlexInput>
+                        <FlexWrap style={{width: '100%'}}>
+                          <FlexToken>
+                            <BoxIcon>
+                              <LuaIcon />
+                            </BoxIcon>
+
+                            <TextLua>LUA</TextLua>
+                          </FlexToken>
+                          <input
+                            type="number"
+                            value={luaInputValue}
+                            onChange={(event) =>
+                              setLuaInputValue(event.target.value)
+                            }
+                          />
+                        </FlexWrap>
+                        <MaxBtn
+                          onClick={() => setLuaInputValue(luaBalanceValue)}
+                        >
+                          Max
+                        </MaxBtn>
+                      </FlexInput>
                     ) : (
-                      <TextLua>0</TextLua>
+                      <FlexToken>
+                        <BoxIcon>
+                          <LuaIcon />
+                        </BoxIcon>
+
+                        <TextLua>LUA</TextLua>
+                        <TextLua>0</TextLua>
+                      </FlexToken>
                     )}
-                  </FlexWrap>
+                  </div>
                 </WrapperChild>
               </BoxLua>
               <BoxKWP>
@@ -307,7 +327,7 @@ const BoxSwap = () => {
                     <>
                       {isApprovedChaFinanceSpencer ? (
                         <Button
-                          disabled={isDisableConvert}
+                          disabled={isDisableButton}
                           onClick={() => {
                             onHandleConverToCHA();
                           }}
@@ -320,7 +340,7 @@ const BoxSwap = () => {
                         </Button>
                       ) : (
                         <Button
-                          // disabled={!onHandleApproveChaFinance}
+                          disabled={isDisableButton}
                           onClick={() => {
                             onHandleApproveChaFinance();
                           }}
