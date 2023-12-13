@@ -324,7 +324,7 @@ const BoxSwap = () => {
                       <TextKWP>CHA</TextKWP>
                     </FlexToken>
                     <TextKWP>
-                      {parseFloat(luaInputValue.toString()).toLocaleString()}
+                      {parseFloat(luaInputValue.toString().trim() || '0').toLocaleString()}
                     </TextKWP>
                   </FlexWrap>
                   <NetworkSwitcher />
