@@ -49,12 +49,13 @@ const HomePage = () => {
         <TextDesc>
           <p style={{ fontSize: 14 }}>
             We support conversion of LUA to CHA on Ethereum automaticaly. <br />
-            To convert LUA on Viction to CHA, contact us via telegram:{" "}
+            To convert LUA on Viction to CHA, follow this 
             <a
               style={{ color: "inherit" }}
-              href="https://t.me/chafinancesupporter"
+              href="https://forms.gle/R9THbnyqNUjABKcH7"
+              target="_black"
             >
-              @chafinancesupporter
+              guideline
             </a>
             <br />
             LUA will be lock forever in{" "}
