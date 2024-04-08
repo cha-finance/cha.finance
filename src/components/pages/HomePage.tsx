@@ -52,7 +52,7 @@ const HomePage = () => {
             To convert LUA on Viction to CHA, follow this&nbsp; 
             <a
               style={{ color: "inherit" }}
-              href="https://forms.gle/R9THbnyqNUjABKcH7"
+              href="https://forms.gle/GduUEkbyxF3RdfGQ7"
               target="_black"
             >
               guideline
