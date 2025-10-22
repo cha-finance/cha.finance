@@ -39,8 +39,7 @@ const HomePage = () => {
         </TopPageWrapper>
         <TextDesc>
           CHA is the native token of the protocol. The stealth project was built
-          by a community of anonymous coders, and researchers. The launch is
-          expected on 31 December, 2024.
+          by a community of anonymous coders, and researchers.
         </TextDesc>
 
         <br />
@@ -49,7 +48,7 @@ const HomePage = () => {
         <TextDesc>
           <p style={{ fontSize: 14 }}>
             We support conversion of LUA to CHA on Ethereum automaticaly. <br />
-            To convert LUA on Viction to CHA, follow this&nbsp; 
+            To convert LUA on Viction to CHA, follow this&nbsp;
             <a
               style={{ color: "inherit" }}
               href="https://forms.gle/GduUEkbyxF3RdfGQ7"
@@ -67,10 +66,10 @@ const HomePage = () => {
               0x33bc5ad2e08a8969111eabef864eb5b75d344723
             </a>
           </p>
-          <br/>
-          <br/>
-          <br/>
-          <br/>
+          <br />
+          <br />
+          <br />
+          <br />
         </TextDesc>
       </PageWrapperFlex>
       {/* <LeftImageBox>
@@ -79,20 +78,29 @@ const HomePage = () => {
       <RightImageBox>
         <RightIcon />
       </RightImageBox> */}
-      <div style={{
-        position: 'fixed',
-        bottom: 0,
-        left: 0,
-        background: 'black',
-        color: 'rgb(225,225,225)',
-        right: 0,
-        textAlign: 'center',
-        padding: '15px',
-        fontFamily: 'monospace',
-        fontSize: 13
-      }}
+      <div
+        style={{
+          position: "fixed",
+          bottom: 0,
+          left: 0,
+          background: "black",
+          color: "rgb(225,225,225)",
+          right: 0,
+          textAlign: "center",
+          padding: "15px",
+          fontFamily: "monospace",
+          fontSize: 13,
+        }}
+      >
+        CHA token contract:{" "}
+        <a
+          style={{ color: "inherit" }}
+          href="https://etherscan.io/token/0x33bc5ad2e08a8969111eabef864eb5b75d344723"
+          target="_blank"
         >
-        CHA token contract: <a style={{color: 'inherit'}} href="https://etherscan.io/token/0x33bc5ad2e08a8969111eabef864eb5b75d344723" target="_blank">0x33bc5ad2e08a8969111eabef864eb5b75d344723</a>; max token cap: 500 million.
+          0x33bc5ad2e08a8969111eabef864eb5b75d344723
+        </a>
+        ; max token cap: 500 million.
       </div>
     </PageWrapper>
   );
