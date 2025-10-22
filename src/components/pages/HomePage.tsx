@@ -42,7 +42,7 @@ const HomePage = () => {
           by a community of anonymous coders, and researchers.
         </TextDesc>
 
-        <br />
+        {/* <br />
         <br />
         <br />
         <TextDesc>
@@ -70,7 +70,7 @@ const HomePage = () => {
           <br />
           <br />
           <br />
-        </TextDesc>
+        </TextDesc> */}
       </PageWrapperFlex>
       {/* <LeftImageBox>
         <LeftImage />
