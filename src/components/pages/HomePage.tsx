@@ -42,7 +42,7 @@ const HomePage = () => {
           by a community of anonymous coders, and researchers.
         </TextDesc>
 
-        {/* <br />
+        <br />
         <br />
         <br />
         <TextDesc>
@@ -66,11 +66,24 @@ const HomePage = () => {
               0x33bc5ad2e08a8969111eabef864eb5b75d344723
             </a>
           </p>
+          <p
+            style={{
+              fontSize: 14,
+              color: "#ff6b35",
+              fontWeight: "bold",
+              marginTop: "10px",
+            }}
+          >
+            ⚠️ When performing LUA - CHA conversion,
+            <br />
+            you agree that you have researched and take full responsibility for
+            your actions
+          </p>
           <br />
           <br />
           <br />
           <br />
-        </TextDesc> */}
+        </TextDesc>
       </PageWrapperFlex>
       {/* <LeftImageBox>
         <LeftImage />
